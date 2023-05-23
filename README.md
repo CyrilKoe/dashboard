@@ -1,0 +1,4 @@
+- content.js : Frontend script
+- server.js : Backend script
+- index.html/css : Unique page
+- data : Contain JSON files (there is no database for now)

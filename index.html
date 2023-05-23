@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html style="user-select: text;" lang="en">
+
+<head style="user-select: text;">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8" style="user-select: text;">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" style="user-select: text;">
+    <meta name="description" content="" style="user-select: text;">
+    <meta name="author" content="" style="user-select: text;">
+    <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"
+        style="user-select: text;">
+
+    <title style="user-select: text;">Sticky Footer Template for Bootstrap</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sticky-footer/" style="user-select: text;">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="index.css" rel="stylesheet" style="user-select: text;">
+    <style style="user-select: text;">
+        .yawas-highlight:hover {
+            opacity: 0.6;
+        }
+
+        .yawas-highlight[data-comment] {
+            border-bottom: 1px dashed black
+        }
+    </style>
+</head>
+
+<body style="user-select: text;">
+
+    <!-- Begin page content -->
+    <main role="main" class="container" style="user-select: text; height: 100%;">
+        <div class="row" style="height:50%;">
+            <div class="col" style="height:100%; overflow-y: scroll;">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Todo</th>
+                            <th scope="col">Deadline</th>
+                        </tr>
+                    </thead>
+                    <tbody id="todo-rows">
+
+                        <!-- add_todo() -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div class="card" style="height:100%;">
+                    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23ffffff&ctz=Europe%2FParis&showTitle=0&showNav=0&showDate=0&showPrint=0&showTabs=0&showCalendars=0&showTz=0&mode=WEEK&src=Y3lyaWwyN2tvZW5pZ0BnbWFpbC5jb20&src=YTYyODc4MDEyODA1YTk2MzViZGM3Y2RkMTVkMDc0OTY1ODQxZTY3MmIyZTJhNDQ5Y2Q0ZGFmOWIyMWE4MWVkNEBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%23009688&color=%237986CB" style="border:solid 1px #777" height="100%" frameborder="0" scrolling="no"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="row mt-2" style="height:50%;">
+            <div class="col">
+                <nav class="navbar navbar-light bg-light justify-content-between">
+                    <a class="navbar-brand">WR Notes</a>
+                    <form class="form-inline">
+                        <button type="button" class="btn btn-secondary">1</button>
+                        <button type="button" class="btn btn-secondary" onclick="update_wr()">Save</button>
+                    </form>
+                </nav>
+                <textarea class="form-control" id="wr_notes"></textarea>
+            </div>
+            <div class="col">
+                <nav class="navbar navbar-light bg-light justify-content-between">
+                    <a class="navbar-brand">Reading Notes</a>
+                    <form class="form-inline">
+                        <button>1</button>
+                        <button>2</button>
+                        <button>3</button>
+                        <button id="save_reading_notes">Save</button>
+                    </form>
+                </nav>
+                <textarea class="form-control"></textarea>
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <div id="todo-modals">
+        <!-- add_todo() -->
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+<script src="content.js"></script>
+<script>
+    api_fetch_wr()
+    api_fetch_todos()
+    add_todo("0", "...", get_day(), "...")
+</script>
+
+</html>

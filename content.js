@@ -110,6 +110,32 @@ function order_list_by_date() {
     }
 }
 
+// Get wr_id from URL
+function get_wr_id() {
+    let query_string = window.location.search;
+    let url_params = new URLSearchParams(query_string);
+    return url_params.get('wr_id') == null ? 1 : url_params.get('wr_id')
+}
+
+// Get rn_id from URL
+function get_rn_id() {
+    let query_string = window.location.search;
+    let url_params = new URLSearchParams(query_string);
+    return url_params.get('rn_id') == null ? 1 : url_params.get('rn_id')
+}
+
+function replace_arg(url, arg, value) {
+    if (value == null) {
+        value = '';
+    }
+    var pattern = new RegExp('\\b('+arg+'=).*?(&|#|$)');
+    if (url.search(pattern)>=0) {
+        return url.replace(pattern,'$1' + value + '$2');
+    }
+    url = url.replace(/[?#]$/,'');
+    return url + (url.indexOf('?')>0 ? '&' : '?') + arg + '=' + value;
+}
+
 // Api call to get all the todos items
 async function api_fetch_todos() {
     fetch("/api/read_todos")
@@ -155,11 +181,21 @@ async function update_todo(id) {
 
 // Api call to fetch the weekly report
 // Todo: add ids to weekly report
-async function api_fetch_wr() {
+async function api_fetch_wr(id) {
     fetch("/api/read_wr")
         .then((response) => response.json())
         .then((data) => {
-            console.log(data[1])
+            let content = document.getElementById("wr_pages")
+            for (const id in data) {
+                let new_url = replace_arg(window.location.href, "wr_id", id)
+                let button_color = id == get_wr_id() ? "dark" : "secondary"
+                content.innerHTML =
+                  `<button type=\"button\" class=\"btn btn-${button_color}\"
+                  onclick=\"window.location='${new_url}'\";
+                  >${id}</button>`
+                  + content.innerHTML
+            }
+            document.getElementById("wr_notes").value = data[id].content
         })
         .catch((error) => console.log(error));
 
@@ -180,10 +216,48 @@ async function api_update_wr(id, content) {
         .catch((error) => console.log(error));
 }
 
-// Update the current weekly report
-// Todo: Add global id to know which weekly report
-// the user is watching
-async function update_wr() {
+async function update_wr(id) {
     let content = document.getElementById("wr_notes").value
-    api_update_wr(1, content)
+    api_update_wr(id, content)
+}
+
+// Api call to fetch the reading note
+async function api_fetch_rn(id) {
+    fetch("/api/read_rn")
+        .then((response) => response.json())
+        .then((data) => {
+            let content = document.getElementById("rn_pages")
+            for (const id in data) {
+                let new_url = replace_arg(window.location.href, "rn_id", id)
+                let button_color = id == get_rn_id() ? "dark" : "secondary"
+                content.innerHTML =
+                  `<button type=\"button\" class=\"btn btn-${button_color}\"
+                  onclick=\"window.location='${new_url}'\";
+                  >${id}</button>`
+                  + content.innerHTML
+            }
+            document.getElementById("rn_notes").value = data[id].content
+        })
+        .catch((error) => console.log(error));
+
+}
+
+// Api call to update one reading note
+async function api_update_rn(id, content) {
+    let new_content = { "id": id, "content": content };
+    fetch("/api/update_rn", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(new_content)
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            location.reload();
+        })
+        .catch((error) => console.log(error));
+}
+
+async function update_rn(id) {
+    let content = document.getElementById("rn_notes").value
+    api_update_rn(id, content)
 }

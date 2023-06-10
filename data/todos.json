@@ -1,8 +1,1 @@
-{
-    "1": {
-        "id": 1,
-        "title": "My todo",
-        "deadline": "01/01/2024",
-        "notes": "..."
-    }
-}
+{"1":{"id":1,"title":"Iguana","deadline":"23/06/2023","notes":"Todo :\nTest hyperram , build CI ?\n\nWeek 23 :\nFirst flow taken from Cheshire"},"2":{"id":2,"title":"Cheshire VCU128","deadline":"18/06/2023","notes":"Todo :\nCheshire VCU128\n\nWeek 23 :\nBuild CI for boot."},"3":{"id":3,"title":"Carfield","deadline":"30/06/2023","notes":"Todo:\nVCU128 flow, first hello word\n\nWeek 23:\nCleaning with Yann"}}

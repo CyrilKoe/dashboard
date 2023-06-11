@@ -7,11 +7,13 @@ function add_todo(id, todo, deadline, more_infos) {
     let bold = is_future(deadline) ? "style=\"font-weight: bold;\"" : ""
     // Get html div to add it the todo
     let todo_rows_obj = document.getElementById("todo-rows");
+    // Hilight the todo if it has news this week
+    let highlight = more_infos.includes(`// Week ${get_week()}`) ? "class=\"table-active\"" : ""
     // Content of the todo
     let id_content = `<th scope=\"row\"><u data-toggle=\"modal\" data-target=\"#modal${id}\">${id}</u></th>`
     let todo_content = `<td ${bold}>${todo}</td>`
     let dead_content = `<td ${bold}>${deadline}</td>`
-    let content = "<tr>" + id_content + todo_content + dead_content + "</tr>"
+    let content = `<tr ${highlight}>` + id_content + todo_content + dead_content + "</tr>"
     todo_rows_obj.innerHTML = todo_rows_obj.innerHTML + content
     // Get html div to add the pop-up code
     let todo_modals_obj = document.getElementById("todo-modals");
@@ -110,18 +112,11 @@ function order_list_by_date() {
     }
 }
 
-// Get wr_id from URL
-function get_wr_id() {
+// Get week from URL
+function get_week() {
     let query_string = window.location.search;
     let url_params = new URLSearchParams(query_string);
-    return url_params.get('wr_id') == null ? 1 : url_params.get('wr_id')
-}
-
-// Get rn_id from URL
-function get_rn_id() {
-    let query_string = window.location.search;
-    let url_params = new URLSearchParams(query_string);
-    return url_params.get('rn_id') == null ? 1 : url_params.get('rn_id')
+    return url_params.get('week') == null ? 23 : url_params.get('week')
 }
 
 function replace_arg(url, arg, value) {
@@ -187,8 +182,8 @@ async function api_fetch_wr(id) {
         .then((data) => {
             let content = document.getElementById("wr_pages")
             for (const id in data) {
-                let new_url = replace_arg(window.location.href, "wr_id", id)
-                let button_color = id == get_wr_id() ? "dark" : "secondary"
+                let new_url = replace_arg(window.location.href, "week", id)
+                let button_color = id == get_week() ? "dark" : "secondary"
                 content.innerHTML =
                   `<button type=\"button\" class=\"btn btn-${button_color}\"
                   onclick=\"window.location='${new_url}'\";
@@ -228,8 +223,8 @@ async function api_fetch_rn(id) {
         .then((data) => {
             let content = document.getElementById("rn_pages")
             for (const id in data) {
-                let new_url = replace_arg(window.location.href, "rn_id", id)
-                let button_color = id == get_rn_id() ? "dark" : "secondary"
+                let new_url = replace_arg(window.location.href, "week", id)
+                let button_color = id == get_week() ? "dark" : "secondary"
                 content.innerHTML =
                   `<button type=\"button\" class=\"btn btn-${button_color}\"
                   onclick=\"window.location='${new_url}'\";

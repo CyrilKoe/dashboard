@@ -65,7 +65,7 @@
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <a class="navbar-brand">WR Notes</a>
                     <form id="wr_pages" class="form-inline">
-                        <button type="button" class="btn btn-secondary" onclick="update_wr(get_wr_id())">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="update_wr(get_week())">Save</button>
                     </form>
                 </nav>
                 <textarea class="form-control" rows=10 id="wr_notes"></textarea>
@@ -74,7 +74,7 @@
                 <nav class="navbar navbar-light bg-light justify-content-between">
                     <a class="navbar-brand">Reading Notes</a>
                     <form id="rn_pages" class="form-inline">
-                        <button type="button" class="btn btn-secondary" onclick="update_rn(get_rn_id())">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="update_rn(get_week())">Save</button>
                     </form>
                 </nav>
                 <textarea class="form-control" rows=10 id="rn_notes"></textarea>
@@ -103,8 +103,8 @@
 
 <script src="content.js"></script>
 <script>
-    api_fetch_wr(get_wr_id())
-    api_fetch_rn(get_rn_id())
+    api_fetch_wr(get_week())
+    api_fetch_rn(get_week())
     api_fetch_todos()
     add_todo("0", "...", get_day(), "...")
 </script>

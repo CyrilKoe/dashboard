@@ -165,7 +165,7 @@ function api_update_wr(request, body) {
     let old_contents = JSON.parse(read_file("data/wrs.json"));
     let new_content = JSON.parse(body);
     old_contents[new_content.id] = new_content
-    if (!parseInt(new_content.id)+1 in old_contents) {
+    if (parseInt(new_content.id)+1 in old_contents == false) {
         old_contents[parseInt(new_content.id)+1] = {"id":(parseInt(new_content.id)+1).toString(),"content":""}
     }
     write_file("data/wrs.json", JSON.stringify(old_contents))
@@ -183,7 +183,7 @@ function api_update_rn(request, body) {
     let old_contents = JSON.parse(read_file("data/rns.json"));
     let new_content = JSON.parse(body);
     old_contents[new_content.id] = new_content
-    if (!parseInt(new_content.id)+1 in old_contents) {
+    if (parseInt(new_content.id)+1 in old_contents == false) {
         old_contents[parseInt(new_content.id)+1] = {"id":(parseInt(new_content.id)+1).toString(),"content":""}
     }
     write_file("data/rns.json", JSON.stringify(old_contents))
